@@ -7,6 +7,7 @@ class Menu_Item_Category_Latest_Post {
   public static function init() {
     add_action( 'wp_nav_menu_item_custom_fields', array( __CLASS__, '_fields' ), 10, 4 );
     add_action( 'wp_update_nav_menu_item', array( __CLASS__, '_save' ), 10, 3 );
+    add_action( 'admin_footer', array( __CLASS__, '_remove_fields' ) );
     add_filter( 'wp_setup_nav_menu_item', array( __CLASS__, '_merge' ) );
   }
 
@@ -38,23 +39,44 @@ class Menu_Item_Category_Latest_Post {
   }
 
 
-  // Print field
+  // Print fields
   public static function _fields( $id, $item, $depth, $args ) {
     $key   = self::$field;
-    $id = 'edit-menu-item-redirect-latest-post';
+    $id = sprintf( 'edit-menu-item-latest-post-%s', $item->ID );
     $name  = sprintf( '%s[%s]', $key, $item->ID );
     $value = get_post_meta( $item->ID, $key, true );
     $checked = checked( $value==true, true, false );
     ?>
-    <p class="field-redirect-latest-post description description-wide">
+    <p class="field-latest-post description description-wide">
       <?php printf(
-        '<input type="checkbox" id="%1$s" name="%2$s" value="true" %3$s /><label for="%1$s">Redirect to the latest post</label>',
+        '<label for="%1$s"><input type="checkbox" id="%1$s" name="%2$s" value="true" %3$s />Redirect to the latest post</label>',
         esc_attr( $id ),
         esc_attr( $name ),
         esc_attr( $checked )
       ) ?>
     </p>
     <?php
+  }
+
+
+  // Remove fields
+  public static function _remove_fields() {
+    global $pagenow;
+    if ($pagenow == "nav-menus.php"){
+    ?>
+      <script>
+        jQuery( document ).ready( function() {
+          jQuery( 'li.menu-item:not(.menu-item-category) .field-latest-post' ).remove();
+
+          jQuery( '#menu-settings-column .button.submit-add-to-menu' ).click(function() {
+            setTimeout( function() {
+              jQuery( 'li.menu-item:not(.menu-item-category) .field-latest-post' ).remove();
+            }, 2000 );
+          } );
+        } );
+      </script>
+    <?php
+    }
   }
 
 

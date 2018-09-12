@@ -25,10 +25,9 @@ class EC_Category_Latest_Post_Redirect {
   // Update menu link
   public function _navbar_redirect( $items, $menu, $args ) {
     foreach( $items as $item ) {
-        if( $item->redirect_latest_post == true)
-            $item->url .= '?latest';
-
+        $item->redirect_latest_post == true && $item->object == 'category' && $item->url .= '?latest';
     }
+
     return $items;
   }
 }

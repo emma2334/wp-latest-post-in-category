@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Latest Post in Category
-Description: Redirect to the latest post in a category. (Depend on Menu Item Custom Fields by Dzikri Aziz)
-Version: 0.1.0
+Description: Redirect category menu item to the latest post in it. (Depend on Menu Item Custom Fields by Dzikri Aziz)
+Version: 0.2.0
 Author: Emma Chung
 Author URI: http://emma2334.github.io
 License: GPLv2

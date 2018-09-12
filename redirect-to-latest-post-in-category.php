@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Latest Post in Category
+Plugin Name: Redirect to Latest Post in Category
 Description: Redirect category menu item to the latest post in it. (Depend on Menu Item Custom Fields by Dzikri Aziz)
 Version: 0.2.1
 Author: Emma Chung

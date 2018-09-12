@@ -12,33 +12,6 @@ class Menu_Item_Category_Latest_Post {
   }
 
 
-  // Save custom field value
-  public static function _save( $menu_id, $menu_item_db_id, $menu_item_args ) {
-    if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-      return;
-    }
-
-    check_admin_referer( 'update-nav_menu', 'update-nav-menu-nonce' );
-
-    $key = self::$field;
-
-    // Sanitize
-    if ( ! empty( $_POST[ $key ][ $menu_item_db_id ] ) ) {
-      // Do some checks here...
-      $value = $_POST[ $key ][ $menu_item_db_id ];
-    } else {
-      $value = null;
-    }
-
-    // Update
-    if ( ! is_null( $value ) ) {
-      update_post_meta( $menu_item_db_id, $key, $value );
-    } else {
-      delete_post_meta( $menu_item_db_id, $key );
-    }
-  }
-
-
   // Print fields
   public static function _fields( $id, $item, $depth, $args ) {
     $key   = self::$field;
@@ -76,6 +49,33 @@ class Menu_Item_Category_Latest_Post {
         } );
       </script>
     <?php
+    }
+  }
+
+
+  // Save custom field value
+  public static function _save( $menu_id, $menu_item_db_id, $menu_item_args ) {
+    if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+      return;
+    }
+
+    check_admin_referer( 'update-nav_menu', 'update-nav-menu-nonce' );
+
+    $key = self::$field;
+
+    // Sanitize
+    if ( ! empty( $_POST[ $key ][ $menu_item_db_id ] ) ) {
+      // Do some checks here...
+      $value = $_POST[ $key ][ $menu_item_db_id ];
+    } else {
+      $value = null;
+    }
+
+    // Update
+    if ( ! is_null( $value ) ) {
+      update_post_meta( $menu_item_db_id, $key, $value );
+    } else {
+      delete_post_meta( $menu_item_db_id, $key );
     }
   }
 

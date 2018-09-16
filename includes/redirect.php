@@ -1,6 +1,6 @@
 <?php
 
-class EC_Category_Latest_Post_Redirect {
+class RCLP_Category_Latest_Post_Redirect {
   public static function init() {
     add_action( 'parse_request', array( __CLASS__, '_url_redirect' ) );
     add_filter( 'wp_get_nav_menu_items', array( __CLASS__, '_navbar_redirect' ), 11, 3 );
@@ -33,6 +33,6 @@ class EC_Category_Latest_Post_Redirect {
 }
 
 
-EC_Category_Latest_Post_Redirect::init();
+RCLP_Category_Latest_Post_Redirect::init();
 
 ?>

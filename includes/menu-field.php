@@ -47,7 +47,7 @@ class RCLP_Custom_Menu_Field {
     // Sanitize
     if ( ! empty( $_POST[ $key ][ $menu_item_db_id ] ) ) {
       // Do some checks here...
-      $value = $_POST[ $key ][ $menu_item_db_id ];
+      $value = sanitize_key($_POST[ $key ][ $menu_item_db_id ]) == 1 ? 1 : 0;
     } else {
       $value = null;
     }
